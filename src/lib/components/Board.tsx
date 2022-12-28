@@ -3,7 +3,7 @@ import { Chessboard,
   CurrentPosition as TCurrentPosition, 
   Pieces, 
   Square} from "react-chessboard";
-import { Chess, Move } from 'chess.js'
+import { Chess } from 'chess.js'
 import { usePositionContext } from "../contexts/PositionContext";
 import { useEffect, useState } from "react";
 
@@ -51,7 +51,7 @@ const Board = (props: TProps) => {
 
   useEffect(() => {
     const currentNodeId = boardPosition?.nodeId
-    let currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0]
+    const currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0]
     const currNodeHistory = currentNode.node.history()
     const tempChessRender = new Chess()
     currNodeHistory.map((el, i) => {
@@ -72,13 +72,13 @@ const Board = (props: TProps) => {
     })
   }, [fen])
 
-  function makeAMove(move: Move, startingFen: string) {
+  function makeAMove(move: {from: Square, to: Square, promotion?: string}, startingFen?: string) {
     const boardCopy = new Chess(startingFen);
     const newMove = boardCopy.move(move);
     if (!newMove) {
       return null
     }
-    let newFen = boardCopy.fen()
+    const newFen = boardCopy.fen()
     const result = {
       newFen,
       newMove
@@ -102,7 +102,7 @@ const Board = (props: TProps) => {
         to: targetSquare
       }
     }
-    // @ts-ignore -- Square is an enum, Move type expects a string
+
     const nextPosition = makeAMove(droppedMove, fen);
     const newFen = nextPosition?.newFen
     const newMove = nextPosition?.newMove
@@ -110,7 +110,7 @@ const Board = (props: TProps) => {
     // illegal move
     if (!newFen) {
       return false
-    };
+    }
     if (chessNodes) {
       const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
       const currentNodeCopy = currentNode.node
@@ -124,8 +124,8 @@ const Board = (props: TProps) => {
           if (newNodeHistory.length === currentNodeHistory.length && boardPosition?.nodeId !== 0) {
             currentNodeHistory.push(newMove?.san)
             currentNodeCopy.move(newMove?.san)
-            let newChessNodes = chessNodes
-            let replacementNode = {
+            const newChessNodes = chessNodes
+            const replacementNode = {
               edgeNodeIndex: currentNode.edgeNodeIndex,
               node: currentNodeCopy,
               nodeId: currentNode.nodeId,
@@ -142,14 +142,14 @@ const Board = (props: TProps) => {
             newNodeHistory.push(newMove?.san)
             const newNode = new Chess()
             newNodeHistory.map(el => newNode.move(el))
-            let newNodeId = Math.max(...chessNodes.map(el => el.nodeId)) + 1
+            const newNodeId = Math.max(...chessNodes.map(el => el.nodeId)) + 1
             const newChessNode = {
               edgeNodeIndex: boardPosition?.moveIndex,
               node: newNode,
               nodeId: newNodeId,
               parentNodeId: currentNode.nodeId
             }
-            let newChessNodesCopy = chessNodes
+            const newChessNodesCopy = chessNodes
             newChessNodesCopy.push(newChessNode)
             setChessNodes(newChessNodesCopy)
             const newMoveIndex = boardPosition.moveIndex + 1

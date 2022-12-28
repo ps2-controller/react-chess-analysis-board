@@ -16,10 +16,10 @@ or
 
 2. Use the component
 ```jsx
-import ChessPGNAnalysisBoard from 'react-chess-analysis-board'
+import ChessAnalysisBoard from 'react-chess-analysis-board'
 
 return (
-	<ChessPGNAnalysisBoard
+	<ChessAnalysisBoard
 		pgnString='[Event "Berlin"]
 		[Site "Berlin GER"]
 		[Date "1852.??.??"]

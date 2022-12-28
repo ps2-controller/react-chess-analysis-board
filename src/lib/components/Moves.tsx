@@ -1,4 +1,3 @@
-import { render } from "chessground/anim"
 import { useEffect, useState } from "react"
 import { usePositionContext } from "../contexts/PositionContext"
 

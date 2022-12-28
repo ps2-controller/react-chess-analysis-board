@@ -53,7 +53,7 @@ const AnalysisBoard = (props: TProps) => {
     setPosition(currentPosition)
   }
   if (getCurrentPosition) {
-    let position = {
+    const position = {
       pgnString,
       boardPosition,
       fen,

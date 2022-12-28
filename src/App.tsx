@@ -1,4 +1,4 @@
-import ChessPGNAnalysisBoard from './lib'
+import ChessAnalysisBoard from './lib'
 import { TPositionTreeSetter } from './lib/contexts/PositionContext'
 import './style.scss'
 
@@ -9,7 +9,7 @@ const App = () => {
   }
 
   return (
-    <ChessPGNAnalysisBoard
+    <ChessAnalysisBoard
       pgnString='[Event "Berlin"]
       [Site "Berlin GER"]
       [Date "1852.??.??"]

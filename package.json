@@ -1,6 +1,6 @@
 {
   "name": "react-chess-analysis-board",
-  "version": "0.0.0",
+  "version": "0.0.11",
   "description": "React component for a fully featured, stylable chess analysis board.",
   "license": "GPL-3.0-or-later",
   "author": "Anurag Angara",
@@ -14,12 +14,13 @@
     "dist",
     "README.md"
   ],
-  "main": "./dist/my-component.umd.js",
-  "module": "./dist/my-component.es.js",
+  "main": "./dist/react-chess-analysis-board.umd.js",
+  "types": "./dist/react-chess-analysis-board.d.ts",
+  "module": "./dist/react-chess-analysis-board.mjs",
   "exports": {
     ".": {
-      "import": "./dist/my-component.es.js",
-      "require": "./dist/my-component.umd.js"
+      "import": "./dist/react-chess-analysis-board.mjs",
+      "require": "./dist/react-chess-analysis-board.umd.js"
     }
   },
   "scripts": {
@@ -49,10 +50,15 @@
     },
     "extends": [
       "eslint:recommended",
-      "plugin:react/recommended"
+      "plugin:react/recommended",
+      "typescript"
     ],
     "parserOptions": {
       "sourceType": "module"
+    },
+    "rules": {
+      "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/ban-types": "off"
     }
   },
   "devDependencies": {
@@ -62,20 +68,25 @@
     "@vitejs/plugin-react": "^3.0.0",
     "c8": "^7.12.0",
     "eslint": "^8.30.0",
+    "eslint-config-typescript": "^3.0.0",
     "eslint-plugin-react": "^7.31.11",
     "jsdom": "^20.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "sass": "^1.57.1",
     "vite": "^4.0.3",
-    "vitest": "^0.26.2"
+    "vitest": "^0.26.2",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "vite-plugin-dts": "^1.7.1",
+    "vite-plugin-linter": "^2.0.2",
+    "vite-tsconfig-paths": "^4.0.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "chess.js": "1.0.0-alpha.0",
-    "react-chessboard": "^1.3.1"
+    "react-chessboard": "^1.3.1",
+    "sass": "^1.57.1"
   }
 }

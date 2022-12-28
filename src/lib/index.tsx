@@ -5,10 +5,10 @@ import { TPanelStyles } from './components/Panel';
 import { TBoardHeaderConfig, TBoardHeaderStyles } from './components/BoardHeader';
 import { TBoardConfig } from './components/Board';
 
-import AnalysisBoard, { TAnalysisBoardStyles } from './components/AnalysisBoard';
+import AnalysisBoard , { TAnalysisBoardStyles } from './components/AnalysisBoard';
 import { TMovesStyles } from './components/Moves';
 
-interface TProps {
+export interface TProps {
   pgnString?: string
   config?: {
     boardHeaderConfig?: TBoardHeaderConfig,
@@ -24,8 +24,7 @@ interface TProps {
   }
 }
 
-const ChessPGNAnalysisBoard = (props: TProps) => {
-
+const ChessAnalysisBoard = (props: TProps) => {
 
   return (
     <PositionContextProvider>
@@ -34,4 +33,4 @@ const ChessPGNAnalysisBoard = (props: TProps) => {
   )
 }
 
-export default ChessPGNAnalysisBoard
+export default ChessAnalysisBoard
