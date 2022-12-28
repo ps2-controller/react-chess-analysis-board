@@ -3,6 +3,8 @@
 # Description
 React Chess Analysis Board provides a React component you can drop into your React app to render an analysis board of any [PGN string](http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm).
 
+![Analysis Example](./assets/analysis-board-gif.gif)
+
 # Usage
 ## Getting Started
 1. Install the library
