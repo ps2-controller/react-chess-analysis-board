@@ -7,7 +7,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/lib/index.tsx'),
       name: 'ReactChessPgnAnalysisBoard',
-      fileName: (format) => `react-chess-pgn-analysis-board.${format}.ts`
+      fileName: (format) => `react-chess-analysis-board.${format}.ts`
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
