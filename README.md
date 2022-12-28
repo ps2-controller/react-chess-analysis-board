@@ -3,6 +3,8 @@
 # Description
 React Chess Analysis Board provides a React component you can drop into your React app to render an analysis board of any [PGN string](http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm).
 
+You can fully customize the style of this analysis board.
+
 ![Analysis Example](./assets/analysis-board-gif.gif)
 
 # Usage
@@ -43,8 +45,6 @@ React Chess Analysis Board accepts the following props:
 
 - `pgnString` **[string | required]**: any valid PGN
 - `config` **[object | optional]**: an object for various components
-	- `boardHeaderConfig` **[object | optional]**: an object for configs related to the board header
-		- `useHoodieGuyWhenUnknown` **[boolean | optional]** -- if `true`, if the PGN being used does not have a player's name, it will be replaced with "Mr. Hoodie Guy". if `false`, it will say "Unknown". Defaults to `false`
 	- `boardConfig` **[object | optional]**: an object for configs related to the board
 		- `fen` **[string | optional]**: a [fen string](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation) to indicate the initial position of the board for analysis
 		- `ChessBoardProps` **[object | optional]**: props that are passed directly to [React-Chessboard](https://github.com/Clariity/react-chessboard#props), used for styling the board. 
@@ -68,7 +68,6 @@ React Chess Analysis Board accepts the following props:
 		- `boardHeaderTextClassName` **[string | optional]**
 		- `boardHeaderTextDetailClassName` **[string | optional]**
 
-
 # Features
 ## Current
 - Full React Analysis Board component
@@ -79,7 +78,6 @@ React Chess Analysis Board accepts the following props:
 	- Access any board state on any branch by clicking on the move
 - PGN-viewer functionality
 - Style with your own css classes
-- Optional use of "Mr. Hoodie Guy" when the PGN does not include player names.
 
 ## Planned
 - Ability to show chess engine notation from a connected engine
@@ -103,3 +101,7 @@ React Chess Analysis Board accepts the following props:
 6.  Push your changes  `git add .`  `git commit -m "feature/cool-new-feature"`  `git push --set-upstream origin your-branch-name`
 7.  Create pull request on GitHub
 8.  Contribute again  `git checkout main`  `git pull upstream main`  `git checkout -b your-new-branch-name`
+
+
+
+* Note: There's one additional undocumented easter egg config for fans of [Agadmator chess channel](https://www.youtube.com/c/AGADMATOR) in this library. Can you find it? ;) 
