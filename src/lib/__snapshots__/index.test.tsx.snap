@@ -1,0 +1,21 @@
+// Vitest Snapshot v1
+
+exports[`HelloWorld > HelloWorld component renders correctly 1`] = `
+<div>
+  Hello, 
+  World
+  !
+</div>
+`;
+
+exports[`HelloWorld > The greetee prop works 1`] = `
+<div>
+  Hello, 
+  Universe
+  !
+</div>
+`;
+
+exports[`PGNBoard > PGNBoard component renders correctly 1`] = `null`;
+
+exports[`PGNBoard > The greetee prop works 1`] = `null`;

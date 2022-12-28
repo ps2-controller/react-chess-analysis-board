@@ -1,0 +1,81 @@
+{
+  "name": "react-chess-pgn-analysis-board",
+  "version": "0.0.0",
+  "description": "React component for a fully featured, stylable chess analysis board.",
+  "license": "GPL-3.0-or-later",
+  "author": "Anurag Angara",
+  "keywords": [
+    "pgn",
+    "chess",
+    "react",
+    "analysis"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "./dist/my-component.umd.js",
+  "module": "./dist/my-component.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-component.es.js",
+      "require": "./dist/my-component.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest run",
+    "watch": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es2020": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^8.19.1",
+    "@testing-library/react": "^13.4.0",
+    "@types/react-test-renderer": "^18.0.0",
+    "@vitejs/plugin-react": "^3.0.0",
+    "c8": "^7.12.0",
+    "eslint": "^8.30.0",
+    "eslint-plugin-react": "^7.31.11",
+    "jsdom": "^20.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
+    "sass": "^1.57.1",
+    "vite": "^4.0.3",
+    "vitest": "^0.26.2"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "chess.js": "1.0.0-alpha.0",
+    "react-chessboard": "^1.3.1"
+  }
+}

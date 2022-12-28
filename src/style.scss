@@ -1,0 +1,22 @@
+.panel-container {
+  width: 560px;
+  display: flex;
+  border-style: solid;
+  align-items: center;
+  justify-content: space-evenly;
+  border-color: gray;
+}
+
+.board-header-container {
+  padding: 8px
+}
+
+.board-header-text {
+  font-weight: bold;
+  margin-bottom: .24rem;
+}
+
+
+.board-header-text-detail {
+  font-size: 16px;
+}

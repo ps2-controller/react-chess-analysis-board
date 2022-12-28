@@ -1,0 +1,58 @@
+.container {
+  height: 900;
+  width: 900;
+}
+
+.RCAB-board-header-container {
+  padding: 5px
+}
+
+.RCAB-board-header-text {
+  font-weight: bold;
+  margin-bottom: .25rem;
+}
+
+.RCAB-board-header-text-detail {
+  font-size: 14px;
+}
+
+.RCAB-panel-container {
+  width: 560px;
+  display: flex;
+  border-style: solid;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.RCAB-analysis-board-container {
+  outline: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.RCAB-moves-container {
+  padding: 48px;
+  width: 24vw;
+}
+
+.RCAB-root-node {
+  cursor: pointer;
+  color: black; 
+}
+
+.RCAB-inactive-node {
+  cursor: pointer;
+  color: gray;
+}
+
+.RCAB-active-node {
+  cursor: pointer;
+  color: blue;
+}
+
+.RCAB-active-move {
+  cursor: pointer;
+  color: green;
+}
+
+
