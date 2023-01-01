@@ -2,7 +2,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts';
-import typescript from '@rollup/plugin-typescript';
+// import typescript from '@rollup/plugin-typescript';
 
 export default defineConfig({
   build: {
@@ -28,6 +28,6 @@ export default defineConfig({
     react(),
     dts({ insertTypesEntry: true, }),
     // only for type checking
-    typescript()
+    // typescript()
   ]
 })
