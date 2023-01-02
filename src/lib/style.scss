@@ -1,10 +1,5 @@
-.container {
-  height: 900;
-  width: 900;
-}
-
 .RCAB-board-header-container {
-  padding: 5px
+  padding: 5px;
 }
 
 .RCAB-board-header-text {
@@ -22,6 +17,11 @@
   border-style: solid;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.RCAB-panel-item {
+  cursor: pointer;
+  color: $g500;
 }
 
 .RCAB-analysis-board-container {

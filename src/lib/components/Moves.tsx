@@ -20,7 +20,8 @@ interface TMove {
   move: string,
   nodeId: number,
   parentNodeId: number,
-  edgeNodeIndex: number
+  edgeNodeIndex: number,
+  className?: string
 }
 
 export type TNodeMoves = TMove[]
@@ -55,35 +56,60 @@ const Moves = (props: TProps) => {
   const [renderMoves, setRenderMoves] = useState<TNodeMoves>([])
 
   useEffect(() => {
-    let moves = chessNodes.map(el => {
-      let history = el.node.history()
-      let nodeMoves = history.map((move, i) => {
+    const moves = chessNodes.map(el => {
+      const history = el.node.history()
+      const nodeMoves = history.map((move, i) => {
         if (typeof(move) !== 'string') {
           move = move.san
         }
-        let moveNumber = Math.floor(i / 2) + 1
+        const moveNumber = Math.floor(i / 2) + 1
+        let className = 'RCAB-'
+        if (el.nodeId === 0) {
+          className += 'root-'
+        }
+        if (boardPosition.nodeId === el.nodeId) {
+          className += 'active-node'
+          if (boardPosition.moveIndex === i + 1) {
+            className += '-active'
+          }
+          if (i === 0) {
+            className += '-first'
+          }
+          if (i === history.length - 1 && i !== 0) {
+            className += '-last'
+          }
+        } else {
+          className += 'inactive-node'
+          if (i === 0) {
+            className += '-first'
+          }
+          if (i === history.length - 1 && i !== 0) {
+            className += '-last'
+          }
+        }
         return {
           index: i,
           moveNumber,
           move,
           nodeId: el.nodeId,
           parentNodeId: el.parentNodeId,
-          edgeNodeIndex: el.edgeNodeIndex
+          edgeNodeIndex: el.edgeNodeIndex,
+          className
         }
       })
       return nodeMoves
     })
     moves.sort((a, b) => a[0].parentNodeId - b[0].parentNodeId)
     const compressMoves = (moves: TMoves) => {
-      let movesCopy = moves
+      const movesCopy = moves
       if (movesCopy.length === 1) {
         moves = movesCopy
         return
       }
-      let child = movesCopy[movesCopy.length - 1]
-      let parent = movesCopy.filter(el => el[0].nodeId === child[0].parentNodeId)[0]
-      let parentIndex = movesCopy.indexOf(parent)
-      let parentCopy = parent
+      const child = movesCopy[movesCopy.length - 1]
+      const parent = movesCopy.filter(el => el[0].nodeId === child[0].parentNodeId)[0]
+      const parentIndex = movesCopy.indexOf(parent)
+      const parentCopy = parent
       for (let i = child[0].edgeNodeIndex; i < child.length; i++) {
         parentCopy.splice(i, 0, child[i])
       }
@@ -99,35 +125,18 @@ const Moves = (props: TProps) => {
     <div className={movesContainerClassName}>
       {renderMoves.map((move: TMove) => {
         
-        let moveClass
-        if (move.nodeId === 0) {
-          if (move.index + 1 === boardPosition.moveIndex && boardPosition.nodeId === 0) {
-            moveClass = activeMoveClassName
-          } else {
-            moveClass = rootNodeClassName
-          }
-        }
-        else if (move.nodeId === boardPosition.nodeId) {
-          if (move.index + 1 === boardPosition.moveIndex && boardPosition.nodeId === move.nodeId) {
-            moveClass = activeMoveClassName
-          } else {
-            moveClass = activeNodeClassName
-          }
-        } else {
-          moveClass = inactiveNodeClassName
-        }
-        let openingParentheses = move.nodeId !== 0 && move.index - move.edgeNodeIndex === 0
+        const openingParentheses = move.nodeId !== 0 && move.index - move.edgeNodeIndex === 0
           ? '('
           : ''
-        let moveNodeLength = renderMoves.filter((el) => el.nodeId === move.nodeId).length
-        let closingParentheses = move.nodeId !== 0 && move.index - move.edgeNodeIndex === moveNodeLength - 1
+        const moveNodeLength = renderMoves.filter((el) => el.nodeId === move.nodeId).length
+        const closingParentheses = move.nodeId !== 0 && move.index - move.edgeNodeIndex === moveNodeLength - 1
           ? ')'
           : ''
-        let moveNumber = move.index % 2 === 0 ? move.moveNumber + '.' : ''
+        const moveNumber = move.index % 2 === 0 ? move.moveNumber + '.' : ''
         return (
           <span 
             onClick={() => handleSelectMove(move)} 
-            className={moveClass} 
+            className={move.className} 
             key={`${move.nodeId}${move.index}`}
           >
             {`${openingParentheses}${moveNumber} ${move.move}${closingParentheses} `}
