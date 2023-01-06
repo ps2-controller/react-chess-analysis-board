@@ -50,23 +50,9 @@ React Chess Analysis Board accepts the following props:
 		- `ChessBoardProps` **[object | optional]**: props that are passed directly to [React-Chessboard](https://github.com/Clariity/react-chessboard#props), used for styling the board. 
 - `getCurrentPosition` **[function | optional]**: calls your callback function, passing a `currentPosition` object as a parameter, which can be used to construct another analysis board you are keeping in sync with this one.
 - `currentPosition`** [object | optional]**: sets the entire state of the analysis board. Used, for example, if keeping two analysis boards in sync with one another. You should directly pass the object from a `getCurrentPosition` call from another analysis board you are keeping in sync with this one.
-- `styles` **[object | optional]**: pass strings for each style that correspond to your own css classes to override the default classes used by React Chess Analysis Board.
-	- `analysisBoardStyles` **[object | optional]**
-		- `analysisBoardContainerClassName` **[string | optional]**
-	- `panelStyles` **[object | optional]**
-		- `panelContainerClassName` **[string | optional]**
-		- `panelClassName` **[string | optional]**
-	- `movesStyles` **[object | optional]**
-		- `movesContainerClassName `**[string | optional]**
-		- `movesClassName` **[string | optional]**
-		- `rootNodeClassName` **[string | optional]**
-		- `activeNodeClassName` **[string | optional]**
-		- `activeMoveClassName` **[string | optional]**
-		- `inactiveNodeClassName` **[string | optional]**
-	- `boardHeaderStyles` **[object | optional]**
-		- `boardHeaderContainerClassName `**[string | optional]**
-		- `boardHeaderTextClassName` **[string | optional]**
-		- `boardHeaderTextDetailClassName` **[string | optional]**
+
+## Styling
+React-chess-analysis-board looks for `RCAB-` prefixed classNames you can use in your source code. If you create css classes with any of the classNames found in `src/lib/style.css` and make them available to the ChessAnalysisBoard component, they will be applied. We recommend copying `src/lib/styles.css` into your own css file, and then iterating on the styling from there. 
 
 # Features
 ## Current

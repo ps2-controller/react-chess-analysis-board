@@ -4,9 +4,9 @@ import './style.scss'
 
 const App = () => {
 
-  const streamPositionTreeToServer = (currentPosition: TPositionTreeSetter) => {
-    console.log('streaming position tree', currentPosition)
-  }
+  // const streamPositionTreeToServer = (currentPosition: TPositionTreeSetter) => {
+
+  // }
 
   return (
     <ChessAnalysisBoard
@@ -39,7 +39,7 @@ const App = () => {
           }
         }
       }}
-      getCurrentPosition={(currentPosition: TPositionTreeSetter) => {streamPositionTreeToServer(currentPosition)}}
+      // getCurrentPosition={(currentPosition: TPositionTreeSetter) => {streamPositionTreeToServer(currentPosition)}}
       styles = {{
         boardHeaderStyles: {
           boardHeaderContainerClassName: 'board-header-container',

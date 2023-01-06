@@ -27,11 +27,11 @@ const Panel = (props: TProps) => {
 
   return (
     <div className={panelContainerClassName}>
-      <div onClick={() => handleLeftClick()}>
+      <div className='RCAB-panel-item' onClick={() => handleLeftClick()}>
         <FontAwesomeIcon icon={faArrowLeftLong} />
       </div>
       <div></div>
-      <div onClick={() => handleRightClick()}>
+      <div className='RCAB-panel-item' onClick={() => handleRightClick()}>
         <FontAwesomeIcon icon={faArrowRightLong} />
       </div>
     </div>

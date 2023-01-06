@@ -9,7 +9,7 @@ import Panel from './Panel';
 import { TPanelStyles } from './Panel';
 
 import { TPositionTreeSetter, usePositionContext } from "../contexts/PositionContext";
-import { Key } from "react";
+import { Key, useEffect } from "react";
 import Moves, { TMovesStyles } from "./Moves";
 
 export interface TAnalysisBoardStyles {
@@ -49,18 +49,24 @@ const AnalysisBoard = (props: TProps) => {
   if(!pgnString || !chessRootNode) {
     return <></>
   }
-  if (currentPosition) {
-    setPosition(currentPosition)
-  }
-  if (getCurrentPosition) {
-    const position = {
-      pgnString,
-      boardPosition,
-      fen,
-      chessNodes
+  useEffect(() => {
+    if (currentPosition) {
+      setPosition(currentPosition)
     }
-    getCurrentPosition(position)
-  }
+  }, [currentPosition])
+
+  useEffect(() => {
+    if (getCurrentPosition) {
+      const position = {
+        pgnString,
+        boardPosition,
+        fen,
+        chessNodes
+      }
+      getCurrentPosition(position)
+    }
+  }, [boardPosition, getCurrentPosition])
+
   chessRootNode.loadPgn(pgnString)
 
   const handleKeyDown = (k: Key) => {
