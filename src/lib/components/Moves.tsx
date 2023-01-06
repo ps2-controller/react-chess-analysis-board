@@ -4,10 +4,6 @@ import { usePositionContext } from "../contexts/PositionContext"
 export interface TMovesStyles {
   movesContainerClassName?: string
   movesClassName?: string
-  rootNodeClassName?: string
-  activeNodeClassName?: string
-  activeMoveClassName?: string
-  inactiveNodeClassName?: string
 }
 
 interface TProps {
@@ -34,11 +30,6 @@ const Moves = (props: TProps) => {
   } = props
 
   const movesContainerClassName = movesStyles?.movesContainerClassName ?? 'RCAB-moves-container'
-  const rootNodeClassName = movesStyles?.rootNodeClassName ?? 'RCAB-root-node'
-  const activeNodeClassName = movesStyles?.activeNodeClassName ?? 'RCAB-active-node'
-  const activeMoveClassName = movesStyles?.activeMoveClassName ?? 'RCAB-active-move'
-  const inactiveNodeClassName = movesStyles?.inactiveNodeClassName ?? 'RCAB-inactive-node'
-
 
   const { chessNodes, boardPosition, setBoardPosition } = usePositionContext()
   if (!chessNodes) {
@@ -69,21 +60,25 @@ const Moves = (props: TProps) => {
         }
         if (boardPosition.nodeId === el.nodeId) {
           className += 'active-node'
-          if (boardPosition.moveIndex === i + 1) {
-            className += '-active'
-          }
-          if (i === 0) {
+          if (i === el.edgeNodeIndex) {
+            console.log('first, active', move)
             className += '-first'
           }
           if (i === history.length - 1 && i !== 0) {
+            console.log('last, active', move)
             className += '-last'
+          }
+          if (boardPosition.moveIndex === i + 1) {
+            className += '-selected'
           }
         } else {
           className += 'inactive-node'
-          if (i === 0) {
+          if (i === el.edgeNodeIndex) {
+            console.log('first, inactive', move)
             className += '-first'
           }
           if (i === history.length - 1 && i !== 0) {
+            console.log('last, inactive', move)
             className += '-last'
           }
         }
@@ -124,22 +119,41 @@ const Moves = (props: TProps) => {
   return (
     <div className={movesContainerClassName}>
       {renderMoves.map((move: TMove) => {
-        
-        const openingParentheses = move.nodeId !== 0 && move.index - move.edgeNodeIndex === 0
-          ? '('
-          : ''
-        const moveNodeLength = renderMoves.filter((el) => el.nodeId === move.nodeId).length
-        const closingParentheses = move.nodeId !== 0 && move.index - move.edgeNodeIndex === moveNodeLength - 1
-          ? ')'
-          : ''
         const moveNumber = move.index % 2 === 0 ? move.moveNumber + '.' : ''
+        if (move.className?.includes('first') && move.parentNodeId === 0) {
+          console.log('before first', move.move)
+          return (
+            <span key={`${move.nodeId}${move.index}`}>
+              <div className="RCAB-move-separator" />
+              <span 
+                onClick={() => handleSelectMove(move)} 
+                className={move.className} 
+              >
+                {`${moveNumber} ${move.move} `}
+              </span>
+            </span>
+          )
+        }
+        if (move.className?.includes('last') && (move.nodeId !== 0)) {
+          return (
+            <span key={`${move.nodeId}${move.index}`}>
+              <span 
+                onClick={() => handleSelectMove(move)} 
+                className={move.className} 
+              >
+                {`${moveNumber} ${move.move} `}
+              </span>
+              <div className="RCAB-submove-separator" />
+            </span>
+          )
+        }
         return (
           <span 
             onClick={() => handleSelectMove(move)} 
             className={move.className} 
             key={`${move.nodeId}${move.index}`}
           >
-            {`${openingParentheses}${moveNumber} ${move.move}${closingParentheses} `}
+            {`${moveNumber} ${move.move} `}
           </span>
         )
       })}

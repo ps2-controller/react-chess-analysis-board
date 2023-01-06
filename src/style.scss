@@ -20,3 +20,107 @@
 .board-header-text-detail {
   font-size: 16px;
 }
+
+/*
+************
+Moves 
+************
+*/
+
+/* Root */
+.RCAB-root-active-node {
+  cursor: pointer;
+  color: black; 
+}
+
+.RCAB-root-active-node-selected {
+  cursor: pointer;
+  color: green;
+}
+.RCAB-root-active-node-first {
+  cursor: pointer;
+  color: black;
+}
+.RCAB-root-active-node-last {
+  cursor: pointer;
+  color: black;
+}
+.RCAB-root-active-node-first-selected {
+  cursor: pointer;
+  color: green;
+}
+.RCAB-root-active-node-last-selected {
+  cursor: pointer;
+  color: green;
+}
+
+.RCAB-root-inactive-node-first {
+  cursor: pointer;
+  color: black; 
+}
+.RCAB-root-inactive-node {
+  cursor: pointer;
+  color: black; 
+}
+.RCAB-root-inactive-node-last {
+  cursor: pointer;
+  color: black; 
+}
+
+.RCAB-inactive-node {
+  cursor: pointer;
+  color: gray;
+}
+
+.RCAB-inactive-node-first {
+  cursor: pointer;
+  color: gray;
+}
+.RCAB-inactive-node-last {
+  cursor: pointer;
+  color: gray;
+}
+.RCAB-inactive-node-first-last {
+  cursor: pointer;
+  color: gray;
+}
+.RCAB-active-node {
+  cursor: pointer;
+  color: blue;
+}
+.RCAB-active-node-first {
+  cursor: pointer;
+  color: blue;
+}
+.RCAB-active-node-first-selected {
+  cursor: pointer;
+  color: green;
+}
+.RCAB-active-node-last {
+  cursor: pointer;
+  color: blue;
+}
+.RCAB-active-node-last-selected {
+  cursor: pointer;
+  color: green;
+}
+.RCAB-active-node-first-last {
+  cursor: pointer;
+  color: blue;
+}
+.RCAB-active-node-first-last-selected {
+  cursor: pointer;
+  color: green;
+}
+.RCAB-active-node-selected {
+  cursor: pointer;
+  color: green;
+}
+.RCAB-move-separator {
+  border-top: 1px solid gray;
+}
+.RCAB-submove-separator {
+  border-top: 2px solid pink;
+}
+
+
