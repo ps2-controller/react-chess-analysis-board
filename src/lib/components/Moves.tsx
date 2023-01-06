@@ -121,7 +121,6 @@ const Moves = (props: TProps) => {
       {renderMoves.map((move: TMove) => {
         const moveNumber = move.index % 2 === 0 ? move.moveNumber + '.' : ''
         if (move.className?.includes('first') && move.parentNodeId === 0) {
-          console.log('before first', move.move)
           return (
             <span key={`${move.nodeId}${move.index}`}>
               <div className="RCAB-move-separator" />

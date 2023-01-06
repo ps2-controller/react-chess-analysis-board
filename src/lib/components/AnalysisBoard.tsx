@@ -18,8 +18,8 @@ export interface TAnalysisBoardStyles {
 
 interface TProps {
   pgnString?: string,
-  currentPosition?: TPositionTreeSetter,
-  getCurrentPosition?: Function,
+  analysisPosition?: TPositionTreeSetter,
+  getAnalysisPosition?: Function,
   config?: {
     boardHeaderConfig?: TBoardHeaderConfig,
     boardConfig?: TBoardConfig
@@ -37,35 +37,35 @@ const AnalysisBoard = (props: TProps) => {
     pgnString,
     config,
     styles,
-    currentPosition,
-    getCurrentPosition
+    analysisPosition,
+    getAnalysisPosition
   } = props
 
 
   const analysisBoardContainerClassName = styles?.analysisBoardStyles?.analysisBoardContainerClassName ?? 'RCAB-analysis-board-container'
 
 
-  const { boardPosition, chessRootNode, handleLeftClick, handleRightClick, fen, chessNodes, setPosition } = usePositionContext()
+  const { boardPosition, chessRootNode, handleLeftClick, handleRightClick, fen, chessNodes, setAnalysisPosition } = usePositionContext()
   if(!pgnString || !chessRootNode) {
     return <></>
   }
   useEffect(() => {
-    if (currentPosition) {
-      setPosition(currentPosition)
+    if (analysisPosition) {
+      setAnalysisPosition(analysisPosition)
     }
-  }, [currentPosition])
+  }, [analysisPosition])
 
   useEffect(() => {
-    if (getCurrentPosition) {
+    if (getAnalysisPosition) {
       const position = {
         pgnString,
         boardPosition,
         fen,
         chessNodes
       }
-      getCurrentPosition(position)
+      getAnalysisPosition(position)
     }
-  }, [boardPosition, getCurrentPosition])
+  }, [boardPosition])
 
   chessRootNode.loadPgn(pgnString)
 

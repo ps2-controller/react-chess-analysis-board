@@ -24,7 +24,7 @@ interface TPositionTree {
   setChessNodes: Function,
   setFen: Function,
   getPosition?: Function,
-  setPosition: Function
+  setAnalysisPosition: Function
 }
 
 export interface TPositionTreeSetter {
@@ -44,7 +44,7 @@ const PositionContext = createContext<TPositionTree>({
   handleLeftClick: () => {},
   setChessNodes: () => {},
   setFen: () => {},
-  setPosition: () => {}
+  setAnalysisPosition: () => {}
 });
 
 export const PositionContextProvider = (props: any) => {
@@ -64,10 +64,10 @@ export const PositionContextProvider = (props: any) => {
   const [fen, setFen] = useState<string>('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
 
   const handleRightClick = () => {
-    let currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
-    let boardHistory = currentNode.node.history()
+    const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
+    const boardHistory = currentNode.node.history()
     if (boardPosition?.moveIndex < boardHistory.length) {
-      let newMoveIndex = boardPosition.moveIndex + 1
+      const newMoveIndex = boardPosition.moveIndex + 1
       setBoardPosition({
         ...boardPosition,
         moveIndex: newMoveIndex
@@ -87,9 +87,9 @@ export const PositionContextProvider = (props: any) => {
       })
       return
     }
-    let currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
-    let edgeNodeIndex = currentNode.edgeNodeIndex
-    let newMoveIndex = boardPosition.moveIndex - 1
+    const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
+    const edgeNodeIndex = currentNode.edgeNodeIndex
+    const newMoveIndex = boardPosition.moveIndex - 1
     if (newMoveIndex > edgeNodeIndex) {
       setBoardPosition({
         ...boardPosition,
@@ -104,7 +104,7 @@ export const PositionContextProvider = (props: any) => {
     }
   }
 
-  const setPosition = (initalPosition: TPositionTreeSetter) => {
+  const setAnalysisPosition = (initalPosition: TPositionTreeSetter) => {
     setBoardPosition(initalPosition.boardPosition)
     if (initalPosition.fen) {
       setFen(initalPosition.fen)
@@ -116,7 +116,7 @@ export const PositionContextProvider = (props: any) => {
     boardPosition, setBoardPosition, 
     chessRootNode, chessNodes, setChessNodes,
     fen, setFen,
-    handleRightClick, handleLeftClick, setPosition
+    handleRightClick, handleLeftClick, setAnalysisPosition
   }} >{props.children}</PositionContext.Provider>
 }
 
