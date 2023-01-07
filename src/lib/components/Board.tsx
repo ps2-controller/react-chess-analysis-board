@@ -35,7 +35,7 @@ const Board = (props: TProps) => {
 
   const [chessBoardProps, setChessBoardProps] = useState<TChessBoardProps>(boardConfig.ChessBoardProps)
 
-  const handleGetCurrentPosition = (currentPosition: TCurrentPosition) => {
+  const handleGetcurrentPosition = (currentPosition: TCurrentPosition) => {
     if (callerGetPositionObject) {
       callerGetPositionObject(currentPosition)
     }
@@ -66,7 +66,7 @@ const Board = (props: TProps) => {
   useEffect(() => {
     setChessBoardProps({
       ...chessBoardProps,
-      getPositionObject: (currentPosition) => handleGetCurrentPosition(currentPosition),
+      getPositionObject: (currentPosition) => handleGetcurrentPosition(currentPosition),
       onPieceDrop: (sourceSquare, targetSquare, piece) => handleOnPieceDrop(sourceSquare, targetSquare, piece),
       position: fen
     })

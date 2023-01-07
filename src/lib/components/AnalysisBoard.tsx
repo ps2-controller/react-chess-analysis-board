@@ -18,8 +18,8 @@ export interface TAnalysisBoardStyles {
 
 interface TProps {
   pgnString?: string,
-  currentPosition?: TPositionTreeSetter,
-  getCurrentPosition?: Function,
+  analysisPosition?: TPositionTreeSetter,
+  getAnalysisPosition?: Function,
   config?: {
     boardHeaderConfig?: TBoardHeaderConfig,
     boardConfig?: TBoardConfig
@@ -37,8 +37,8 @@ const AnalysisBoard = (props: TProps) => {
     pgnString,
     config,
     styles,
-    currentPosition,
-    getCurrentPosition
+    analysisPosition,
+    getAnalysisPosition
   } = props
 
 
@@ -50,22 +50,22 @@ const AnalysisBoard = (props: TProps) => {
     return <></>
   }
   useEffect(() => {
-    if (currentPosition) {
-      setPosition(currentPosition)
+    if (analysisPosition) {
+      setPosition(analysisPosition)
     }
-  }, [currentPosition])
+  }, [analysisPosition])
 
   useEffect(() => {
-    if (getCurrentPosition) {
+    if (getAnalysisPosition) {
       const position = {
         pgnString,
         boardPosition,
         fen,
         chessNodes
       }
-      getCurrentPosition(position)
+      getAnalysisPosition(position)
     }
-  }, [boardPosition, getCurrentPosition])
+  }, [boardPosition, getAnalysisPosition])
 
   chessRootNode.loadPgn(pgnString)
 

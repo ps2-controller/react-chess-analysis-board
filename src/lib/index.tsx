@@ -14,8 +14,8 @@ export interface TProps {
     boardHeaderConfig?: TBoardHeaderConfig,
     boardConfig?: TBoardConfig
   },
-  getCurrentPosition?: Function,
-  currentPosition?: TPositionTreeSetter,
+  getAnalysisPosition?: Function,
+  analysisPosition?: TPositionTreeSetter,
   styles?: {
     analysisBoardStyles?: TAnalysisBoardStyles,
     panelStyles?: TPanelStyles,

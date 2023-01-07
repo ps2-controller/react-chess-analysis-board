@@ -61,11 +61,9 @@ const Moves = (props: TProps) => {
         if (boardPosition.nodeId === el.nodeId) {
           className += 'active-node'
           if (i === el.edgeNodeIndex) {
-            console.log('first, active', move)
             className += '-first'
           }
           if (i === history.length - 1 && i !== 0) {
-            console.log('last, active', move)
             className += '-last'
           }
           if (boardPosition.moveIndex === i + 1) {
@@ -74,11 +72,9 @@ const Moves = (props: TProps) => {
         } else {
           className += 'inactive-node'
           if (i === el.edgeNodeIndex) {
-            console.log('first, inactive', move)
             className += '-first'
           }
           if (i === history.length - 1 && i !== 0) {
-            console.log('last, inactive', move)
             className += '-last'
           }
         }
@@ -121,7 +117,6 @@ const Moves = (props: TProps) => {
       {renderMoves.map((move: TMove) => {
         const moveNumber = move.index % 2 === 0 ? move.moveNumber + '.' : ''
         if (move.className?.includes('first') && move.parentNodeId === 0) {
-          console.log('before first', move.move)
           return (
             <span key={`${move.nodeId}${move.index}`}>
               <div className="RCAB-move-separator" />
