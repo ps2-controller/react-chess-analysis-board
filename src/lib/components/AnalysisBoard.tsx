@@ -46,9 +46,6 @@ const AnalysisBoard = (props: TProps) => {
 
 
   const { boardPosition, chessRootNode, handleLeftClick, handleRightClick, fen, chessNodes, setPosition } = usePositionContext()
-  if(!pgnString || !chessRootNode) {
-    return <></>
-  }
   useEffect(() => {
     if (analysisPosition) {
       setPosition(analysisPosition)
@@ -65,9 +62,14 @@ const AnalysisBoard = (props: TProps) => {
       }
       getAnalysisPosition(position)
     }
-  }, [boardPosition, getAnalysisPosition])
+  }, [boardPosition])
 
-  chessRootNode.loadPgn(pgnString)
+  if(!pgnString || !chessRootNode) {
+    return <></>
+  }
+  useEffect(() => {
+    chessRootNode.loadPgn(pgnString)
+  }, [])
 
   const handleKeyDown = (k: Key) => {
     if (k === 'ArrowRight') {

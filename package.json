@@ -1,6 +1,6 @@
 {
   "name": "react-chess-analysis-board",
-  "version": "0.0.17-beta.2",
+  "version": "0.0.18",
   "description": "React component for a fully featured, stylable chess analysis board.",
   "license": "GPL-3.0-or-later",
   "author": "Anurag Angara",
