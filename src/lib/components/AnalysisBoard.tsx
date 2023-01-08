@@ -64,12 +64,12 @@ const AnalysisBoard = (props: TProps) => {
     }
   }, [boardPosition])
 
-  if(!pgnString || !chessRootNode) {
-    return <></>
-  }
   useEffect(() => {
-    chessRootNode.loadPgn(pgnString)
+    if(pgnString && chessRootNode) {
+      chessRootNode?.loadPgn(pgnString)
+    }
   }, [])
+
 
   const handleKeyDown = (k: Key) => {
     if (k === 'ArrowRight') {
