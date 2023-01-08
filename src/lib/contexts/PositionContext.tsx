@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from 'react';
+import { useState, useContext, createContext, useCallback } from 'react';
 import { Chess } from 'chess.js'
 
 interface TChessNodes {
@@ -104,13 +104,13 @@ export const PositionContextProvider = (props: any) => {
     }
   }
 
-  const setPosition = (initalPosition: TPositionTreeSetter) => {
+  const setPosition = useCallback((initalPosition: TPositionTreeSetter) => {
     setBoardPosition(initalPosition.boardPosition)
     if (initalPosition.fen) {
       setFen(initalPosition.fen)
     }
     setChessNodes(initalPosition.chessNodes)
-  }
+  }, [])
 
   return <PositionContext.Provider value={{
     boardPosition, setBoardPosition, 
