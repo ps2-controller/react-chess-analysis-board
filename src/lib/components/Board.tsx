@@ -110,6 +110,7 @@ const Board = (props: TProps) => {
     if (chessNodes) {
       const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
       const currentNodeCopy = currentNode.node
+      console.log('this is the thing that is failing', currentNode)
       const currentNodeHistory = currentNode.node.history()
       const nextMove = currentNodeHistory[boardPosition?.moveIndex]
       if (nextMove === newMove?.san) {

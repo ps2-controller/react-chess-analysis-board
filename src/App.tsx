@@ -5,12 +5,14 @@ import './style.scss'
 
 const App = () => {
 
-  const [boardPosition, setBoardPosition] = useState<TPositionTreeSetter>()
+  const [boardOnePosition, setBoardOnePosition] = useState<TPositionTreeSetter>()
+  const [boardTwoPosition, setBoardTwoPosition] = useState<TPositionTreeSetter>()
   const boardOneStream = useCallback((analysisPosition: TPositionTreeSetter) => {
-    setBoardPosition(analysisPosition)
+    setBoardTwoPosition(analysisPosition)
   }, [])
   const boardTwoStream = useCallback((analysisPosition: TPositionTreeSetter) => {
-    setBoardPosition(analysisPosition)
+    console.log('running board 2 stream')
+    setBoardOnePosition(analysisPosition)
   }, [])
 
   return (
@@ -45,8 +47,8 @@ const App = () => {
           }
         }
       }}
-      analysisPosition={boardPosition}
-      getAnalysisPosition={(analysisPosition: TPositionTreeSetter) => {boardTwoStream(analysisPosition)}}
+      analysisPosition={boardOnePosition}
+      getAnalysisPosition={(analysisPosition: TPositionTreeSetter) => {boardOneStream(analysisPosition)}}
       styles = {{
         boardHeaderStyles: {
           boardHeaderContainerClassName: 'board-header-container',
@@ -90,8 +92,8 @@ const App = () => {
           }
         }
       }}
-      analysisPosition={boardPosition}
-      getAnalysisPosition={(analysisPosition: TPositionTreeSetter) => {boardOneStream(analysisPosition)}}
+      analysisPosition={boardTwoPosition}
+      getAnalysisPosition={(analysisPosition: TPositionTreeSetter) => {boardTwoStream(analysisPosition)}}
       styles = {{
         boardHeaderStyles: {
           boardHeaderContainerClassName: 'board-header-container',
