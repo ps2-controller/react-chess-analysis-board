@@ -38,9 +38,8 @@ const AnalysisBoard = (props: TProps) => {
     config,
     styles,
     analysisPosition,
-    getAnalysisPosition
+    getAnalysisPosition,
   } = props
-
 
   const analysisBoardContainerClassName = styles?.analysisBoardStyles?.analysisBoardContainerClassName ?? 'RCAB-analysis-board-container'
 
@@ -48,7 +47,7 @@ const AnalysisBoard = (props: TProps) => {
   const { boardPosition, chessRootNode, handleLeftClick, handleRightClick, fen, chessNodes, setPosition } = usePositionContext()
 
   useEffect(() => {
-    if (getAnalysisPosition) {
+    if (getAnalysisPosition && analysisPosition?.fen !== fen) {
       const position = {
         pgnString,
         boardPosition,
@@ -57,10 +56,10 @@ const AnalysisBoard = (props: TProps) => {
       }
       getAnalysisPosition(position)
     }
-  }, [boardPosition])
+  }, [boardPosition, fen])
 
   useEffect(() => {
-    if (analysisPosition) {
+    if (analysisPosition && analysisPosition?.fen !== 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1') {
       setPosition(analysisPosition)
       chessRootNode?.loadPgn(analysisPosition.pgnString)
     }

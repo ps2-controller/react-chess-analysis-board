@@ -7,11 +7,9 @@ const App = () => {
 
   const [boardPosition, setBoardPosition] = useState<TPositionTreeSetter>()
   const boardOneStream = useCallback((analysisPosition: TPositionTreeSetter) => {
-    console.log('logging ap', analysisPosition)
     setBoardPosition(analysisPosition)
   }, [])
   const boardTwoStream = useCallback((analysisPosition: TPositionTreeSetter) => {
-    console.log('logging ap', analysisPosition)
     setBoardPosition(analysisPosition)
   }, [])
 
@@ -83,7 +81,7 @@ const App = () => {
       23.Bd7+ Kf8 24.Bxe7# 1-0'
       config = {{
         boardHeaderConfig: {
-          useHoodieGuyWhenUnknown: true
+          useHoodieGuyWhenUnknown: false
         },
         boardConfig: {
           ChessBoardProps: {

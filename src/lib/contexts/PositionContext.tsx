@@ -1,4 +1,4 @@
-import { useState, useContext, createContext, useCallback } from 'react';
+import { useState, useContext, createContext, useEffect } from 'react';
 import { Chess } from 'chess.js'
 
 interface TChessNodes {
@@ -62,6 +62,19 @@ export const PositionContextProvider = (props: any) => {
   }])
 
   const [fen, setFen] = useState<string>('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+  useEffect(() => {
+    const currentNode = chessNodes.filter((el) => el.nodeId === boardPosition.nodeId)[0]
+    const currentNodeHistory = currentNode.node.history()
+    const tempChessRender = new Chess()
+    currentNodeHistory.map((el, i) => {
+      if (i < boardPosition?.moveIndex) {
+        tempChessRender.move(el)
+      }
+    })
+    const newFen = tempChessRender.fen()
+    setFen(newFen)
+
+  }, [boardPosition])
 
   const handleRightClick = () => {
     const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
@@ -104,13 +117,13 @@ export const PositionContextProvider = (props: any) => {
     }
   }
 
-  const setPosition = useCallback((initalPosition: TPositionTreeSetter) => {
+  const setPosition = (initalPosition: TPositionTreeSetter) => {
     setBoardPosition(initalPosition.boardPosition)
     if (initalPosition.fen) {
       setFen(initalPosition.fen)
     }
     setChessNodes(initalPosition.chessNodes)
-  }, [])
+  }
 
   return <PositionContext.Provider value={{
     boardPosition, setBoardPosition, 

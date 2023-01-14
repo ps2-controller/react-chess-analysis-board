@@ -39,22 +39,19 @@ const Board = (props: TProps) => {
     if (callerGetPositionObject) {
       callerGetPositionObject(currentPosition)
     }
-    const previousBoard = new Chess(fen)
-    const legalMoves = previousBoard.moves()    
   }
   const handleOnPieceDrop = (sourceSquare: Square, targetSquare: Square, piece: Pieces) => {
     return onDrop(sourceSquare, targetSquare, piece) 
   }
 
   const callerGetPositionObject = chessBoardProps.getPositionObject
-  const callerOnPieceDrop = chessBoardProps.onPieceDrop
 
   useEffect(() => {
     const currentNodeId = boardPosition?.nodeId
     const currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0]
-    const currNodeHistory = currentNode.node.history()
+    const currentNodeHistory = currentNode.node.history()
     const tempChessRender = new Chess()
-    currNodeHistory.map((el, i) => {
+    currentNodeHistory.map((el, i) => {
       if (i < boardPosition?.moveIndex) {
         tempChessRender.move(el)
       }
@@ -89,7 +86,6 @@ const Board = (props: TProps) => {
   
   function onDrop(sourceSquare: Square, targetSquare: Square, piece: Pieces) {  
     let droppedMove
-    console.log('hmm...')
     if (targetSquare[1] === '8' && piece[1] === 'P') {
       droppedMove = {
         from: sourceSquare,
