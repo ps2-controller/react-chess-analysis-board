@@ -49,9 +49,10 @@ const Board = (props: TProps) => {
   useEffect(() => {
     const currentNodeId = boardPosition?.nodeId
     const currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0]
-    console.log('current node when we make a remote change', currentNode)
+    console.log('current node when we make a remote change', currentNode?.node?.history)
     const currentNodeHistory = currentNode.node.history()
     const tempChessRender = new Chess()
+    console.log('can we get this far?')
     currentNodeHistory.map((el, i) => {
       if (i < boardPosition?.moveIndex) {
         tempChessRender.move(el)
