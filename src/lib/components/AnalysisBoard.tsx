@@ -48,6 +48,7 @@ const AnalysisBoard = (props: TProps) => {
 
   useEffect(() => {
     if (getAnalysisPosition && analysisPosition?.fen !== fen) {
+      console.warn('trying to stream out')
       const position = {
         pgnString,
         boardPosition,
