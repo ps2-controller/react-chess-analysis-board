@@ -5,7 +5,9 @@ interface TChessNodes {
   edgeNodeIndex: number, 
   node: Chess,
   nodeId: number,
-  parentNodeId: number
+  parentNodeId: number,
+  history?: Function,
+  fen?: Function
 }
 
 interface TBoardPosition {
