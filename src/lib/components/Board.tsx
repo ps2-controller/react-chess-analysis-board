@@ -49,6 +49,7 @@ const Board = (props: TProps) => {
   useEffect(() => {
     const currentNodeId = boardPosition?.nodeId
     const currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0]
+    console.log('current node when we make a remote change', currentNode)
     const currentNodeHistory = currentNode.node.history()
     const tempChessRender = new Chess()
     currentNodeHistory.map((el, i) => {
@@ -110,7 +111,7 @@ const Board = (props: TProps) => {
     if (chessNodes) {
       const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
       const currentNodeCopy = currentNode.node
-      console.log('this is the thing that is failing', currentNode)
+      console.log('current node when we make a local change', currentNode)
       const currentNodeHistory = currentNode.node.history()
       const nextMove = currentNodeHistory[boardPosition?.moveIndex]
       if (nextMove === newMove?.san) {

@@ -61,6 +61,7 @@ const AnalysisBoard = (props: TProps) => {
 
   useEffect(() => {
     if (analysisPosition && analysisPosition?.fen !== 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1') {
+      console.log('first, let us set the analysis position', analysisPosition)
       setPosition(analysisPosition)
       chessRootNode?.loadPgn(analysisPosition.pgnString)
     }
