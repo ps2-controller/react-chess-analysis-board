@@ -47,6 +47,7 @@ const AnalysisBoard = (props: TProps) => {
   const { boardPosition, chessRootNode, handleLeftClick, handleRightClick, fen, chessNodes, setPosition } = usePositionContext()
 
   useEffect(() => {
+    console.log('on fen change, this too', fen)
     if (getAnalysisPosition && analysisPosition?.fen !== fen) {
       console.warn('trying to stream out')
       const position = {

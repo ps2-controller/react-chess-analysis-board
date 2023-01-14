@@ -58,10 +58,12 @@ const Board = (props: TProps) => {
       }
     })
     const newFen = tempChessRender.fen()
+    console.log('we even get our new Fen!', newFen)
     setFen(newFen)
   }, [chessNodes, boardPosition])
   
   useEffect(() => {
+    console.log('since the fen changed, we run this hook')
     setChessBoardProps({
       ...chessBoardProps,
       getPositionObject: (currentPosition) => handleGetcurrentPosition(currentPosition),
