@@ -52,10 +52,12 @@ const AnalysisBoard = (props: TProps) => {
       const tempNodes = chessNodes
       tempNodes?.map((el) => {
         const historyArray = el?.node?.history()
+        console.log('here is some history', historyArray)
         const newEl = {
           ...el,
           historyArray
         }
+        console.log('and its full element', newEl)
         return newEl
       })
       console.warn('trying to stream out', tempNodes)
