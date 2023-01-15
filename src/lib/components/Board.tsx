@@ -50,6 +50,7 @@ const Board = (props: TProps) => {
     const currentNodeId = boardPosition?.nodeId
     const currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0]
     console.log('current node when we make a remote change', currentNode?.node?.history)
+    console.log('full current node', currentNode)
     const currentNodeHistory = currentNode.node.history()
     const tempChessRender = new Chess()
     console.log('can we get this far?')
@@ -61,7 +62,7 @@ const Board = (props: TProps) => {
     const newFen = tempChessRender.fen()
     console.log('we even get our new Fen!', newFen)
     setFen(newFen)
-  }, [chessNodes, boardPosition])
+  }, [chessNodes])
   
   useEffect(() => {
     console.log('since the fen changed, we run this hook')

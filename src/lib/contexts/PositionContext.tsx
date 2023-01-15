@@ -138,6 +138,7 @@ export const PositionContextProvider = (props: any) => {
       return newEl
     })
     console.log('and now our nodes are: ', tempNodes)
+    console.log('do they have fxns now?', tempNodes[0].node.history)
     setChessNodes(tempNodes)
   }
 
