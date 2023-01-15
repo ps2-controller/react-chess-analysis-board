@@ -49,7 +49,6 @@ const AnalysisBoard = (props: TProps) => {
   useEffect(() => {
     console.log('on fen change, this too', fen)
     if (getAnalysisPosition && analysisPosition?.fen !== fen) {
-      console.warn('trying to stream out')
       const tempNodes = chessNodes
       tempNodes?.map((el) => {
         const historyArray = el?.node?.history()
@@ -58,7 +57,9 @@ const AnalysisBoard = (props: TProps) => {
           // @ts-expect-error move is type string
           historyArray
         }
+        return el
       })
+      console.warn('trying to stream out', tempNodes)
       const position = {
         pgnString,
         boardPosition,
