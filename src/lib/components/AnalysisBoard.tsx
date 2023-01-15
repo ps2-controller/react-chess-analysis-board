@@ -52,12 +52,11 @@ const AnalysisBoard = (props: TProps) => {
       const tempNodes = chessNodes
       tempNodes?.map((el) => {
         const historyArray = el?.node?.history()
-        el = {
+        const newEl = {
           ...el,
-          // @ts-expect-error move is type string
           historyArray
         }
-        return el
+        return newEl
       })
       console.warn('trying to stream out', tempNodes)
       const position = {
