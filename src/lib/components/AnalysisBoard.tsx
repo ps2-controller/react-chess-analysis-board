@@ -50,11 +50,19 @@ const AnalysisBoard = (props: TProps) => {
     console.log('on fen change, this too', fen)
     if (getAnalysisPosition && analysisPosition?.fen !== fen) {
       console.warn('trying to stream out')
+      const tempNodes = chessNodes
+      tempNodes?.map((el) => {
+        const fenString = el.node.fen()
+        el = {
+          ...el,
+          fenString
+        }
+      })
       const position = {
         pgnString,
         boardPosition,
         fen,
-        chessNodes
+        chessNodes: tempNodes
       }
       getAnalysisPosition(position)
     }

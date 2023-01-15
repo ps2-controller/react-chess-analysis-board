@@ -6,8 +6,7 @@ interface TChessNodes {
   node: Chess,
   nodeId: number,
   parentNodeId: number,
-  history?: Function,
-  fen?: Function
+  fenString?: string
 }
 
 interface TBoardPosition {
@@ -124,10 +123,16 @@ export const PositionContextProvider = (props: any) => {
     if (initalPosition.fen) {
       setFen(initalPosition.fen)
     }
-    console.log('heres the position we are setting', initalPosition.chessNodes)
-    console.log('first node, for example', initalPosition.chessNodes[0])
-    console.log('so does it have a history function?', initalPosition.chessNodes[0].history)
-    setChessNodes(initalPosition.chessNodes)
+    const tempNodes = initalPosition.chessNodes
+    tempNodes.map((el) => {
+      const tempNode = new Chess(el.fenString)
+      const newEl = {
+        ...el,
+        node: tempNode
+      }
+      return newEl
+    })
+    setChessNodes(tempNodes)
   }
 
   return <PositionContext.Provider value={{
