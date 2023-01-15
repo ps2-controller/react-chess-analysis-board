@@ -50,7 +50,7 @@ const AnalysisBoard = (props: TProps) => {
     console.log('on fen change, this too', fen)
     if (getAnalysisPosition && analysisPosition?.fen !== fen) {
       const tempNodes = chessNodes
-      tempNodes?.map((el) => {
+      const newTempNodes = tempNodes?.map((el) => {
         const historyArray = el?.node?.history()
         console.log('here is some history', historyArray)
         const newEl = {
@@ -60,12 +60,12 @@ const AnalysisBoard = (props: TProps) => {
         console.log('and its full element', newEl)
         return newEl
       })
-      console.warn('trying to stream out', tempNodes)
+      console.warn('trying to stream out', newTempNodes)
       const position = {
         pgnString,
         boardPosition,
         fen,
-        chessNodes: tempNodes
+        chessNodes: newTempNodes
       }
       getAnalysisPosition(position)
     }
