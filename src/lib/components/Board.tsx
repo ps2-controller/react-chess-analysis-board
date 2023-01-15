@@ -49,23 +49,18 @@ const Board = (props: TProps) => {
   useEffect(() => {
     const currentNodeId = boardPosition?.nodeId
     const currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0]
-    console.log('current node when we make a remote change', currentNode?.node?.history)
-    console.log('full current node', currentNode)
     const currentNodeHistory = currentNode.node.history()
     const tempChessRender = new Chess()
-    console.log('can we get this far?')
     currentNodeHistory.map((el, i) => {
       if (i < boardPosition?.moveIndex) {
         tempChessRender.move(el)
       }
     })
     const newFen = tempChessRender.fen()
-    console.log('we even get our new Fen!', newFen)
     setFen(newFen)
   }, [chessNodes])
   
   useEffect(() => {
-    console.log('since the fen changed, we run this hook')
     setChessBoardProps({
       ...chessBoardProps,
       getPositionObject: (currentPosition) => handleGetcurrentPosition(currentPosition),
@@ -115,7 +110,6 @@ const Board = (props: TProps) => {
     if (chessNodes) {
       const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
       const currentNodeCopy = currentNode.node
-      console.log('current node when we make a local change', currentNode)
       const currentNodeHistory = currentNode.node.history()
       const nextMove = currentNodeHistory[boardPosition?.moveIndex]
       if (nextMove === newMove?.san) {

@@ -11,7 +11,6 @@ const App = () => {
     setBoardTwoPosition(analysisPosition)
   }, [])
   const boardTwoStream = useCallback((analysisPosition: TPositionTreeSetter) => {
-    console.log('running board 2 stream')
     setBoardOnePosition(analysisPosition)
   }, [])
 

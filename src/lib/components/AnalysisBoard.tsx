@@ -47,20 +47,16 @@ const AnalysisBoard = (props: TProps) => {
   const { boardPosition, chessRootNode, handleLeftClick, handleRightClick, fen, chessNodes, setPosition } = usePositionContext()
 
   useEffect(() => {
-    console.log('on fen change, this too', fen)
     if (getAnalysisPosition && analysisPosition?.fen !== fen) {
       const tempNodes = chessNodes
       const newTempNodes = tempNodes?.map((el) => {
         const historyArray = el?.node?.history()
-        console.log('here is some history', historyArray)
         const newEl = {
           ...el,
           historyArray
         }
-        console.log('and its full element', newEl)
         return newEl
       })
-      console.warn('trying to stream out', newTempNodes)
       const position = {
         pgnString,
         boardPosition,
@@ -73,7 +69,6 @@ const AnalysisBoard = (props: TProps) => {
 
   useEffect(() => {
     if (analysisPosition && analysisPosition?.fen !== 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1') {
-      console.log('first, let us set the analysis position', analysisPosition)
       setPosition(analysisPosition)
       chessRootNode?.loadPgn(analysisPosition.pgnString)
     }

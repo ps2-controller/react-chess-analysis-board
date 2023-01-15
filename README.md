@@ -5,6 +5,8 @@ React Chess Analysis Board provides a React component you can drop into your Rea
 
 You can fully customize the style of this analysis board.
 
+For a deeper understanding of how the library works, check out [this article](https://medium.com/@anuragangara/building-a-chess-analysis-board-in-react-b59952727d4b).
+
 ![Analysis Example](./assets/analysis-board-gif.gif)
 
 # Usage
@@ -14,7 +16,11 @@ You can fully customize the style of this analysis board.
 or
 `yarn add react-chess-analysis-board`
 
-2. Use the component
+2. Set up styles.
+Copy and paste the entire file `src/style.scss` to get started with default styles. Make these CSS classes available to the component in your project that will use `react-chess-analysis-board`. This gets you started with the default styles, which you can iterate on.
+
+
+3. Use the component
 ```jsx
 import ChessAnalysisBoard from 'react-chess-analysis-board'
 
@@ -52,7 +58,9 @@ React Chess Analysis Board accepts the following props:
 - `analysisPosition`** [object | optional]**: sets the entire state of the analysis board. Used, for example, if keeping two analysis boards in sync with one another. You should directly pass the object from a `getAnalysisPosition` call from another analysis board you are keeping in sync with this one.
 
 ## Styling
-React-chess-analysis-board looks for `RCAB-` prefixed classNames you can use in your source code. If you create css classes with any of the classNames found in `src/lib/style.css` and make them available to the ChessAnalysisBoard component, they will be applied. We recommend copying `src/lib/styles.css` into your own css file, and then iterating on the styling from there. 
+React-chess-analysis-board looks for specific `RCAB-` prefixed classNames you can use in your source code. 
+
+If you create css classes with any of the classNames found in `src/lib/style.css` and make them available to the ChessAnalysisBoard component, they will be applied. We recommend copying `src/lib/styles.css` into your own css file, and then iterating on the styling from there. 
 
 # Features
 ## Current
