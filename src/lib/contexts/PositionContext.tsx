@@ -1,12 +1,12 @@
 import { useState, useContext, createContext, useEffect } from 'react';
-import { Chess } from 'chess.js'
+import { Chess, Move } from 'chess.js'
 
 interface TChessNodes {
   edgeNodeIndex: number, 
   node: Chess,
   nodeId: number,
   parentNodeId: number,
-  fenString?: string
+  historyArray?: string | Move[]
 }
 
 interface TBoardPosition {
@@ -118,20 +118,26 @@ export const PositionContextProvider = (props: any) => {
     }
   }
 
-  const setPosition = (initalPosition: TPositionTreeSetter) => {
-    setBoardPosition(initalPosition.boardPosition)
-    if (initalPosition.fen) {
-      setFen(initalPosition.fen)
+  const setPosition = (newPosition: TPositionTreeSetter) => {
+    setBoardPosition(newPosition.boardPosition)
+    if (newPosition.fen) {
+      setFen(newPosition.fen)
     }
-    const tempNodes = initalPosition.chessNodes
+    const tempNodes = newPosition.chessNodes
     tempNodes.map((el) => {
-      const tempNode = new Chess(el.fenString)
+      const tempNode = new Chess()
+      if (typeof el?.historyArray !== 'string') {
+        el?.historyArray?.map((move) => {
+          tempNode.move(move)
+        })
+      }
       const newEl = {
         ...el,
         node: tempNode
       }
       return newEl
     })
+    console.log('and now our nodes are: ', tempNodes)
     setChessNodes(tempNodes)
   }
 
