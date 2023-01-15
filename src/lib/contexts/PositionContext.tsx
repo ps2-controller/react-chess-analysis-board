@@ -124,7 +124,7 @@ export const PositionContextProvider = (props: any) => {
       setFen(newPosition.fen)
     }
     const tempNodes = newPosition.chessNodes
-    tempNodes.map((el) => {
+    const newTempNodes = tempNodes.map((el) => {
       const tempNode = new Chess()
       if (typeof el?.historyArray !== 'string') {
         el?.historyArray?.map((move) => {
@@ -137,9 +137,9 @@ export const PositionContextProvider = (props: any) => {
       }
       return newEl
     })
-    console.log('and now our nodes are: ', tempNodes)
-    console.log('do they have fxns now?', tempNodes[0].node.history)
-    setChessNodes(tempNodes)
+    console.log('and now our nodes are: ', newTempNodes)
+    console.log('do they have fxns now?', newTempNodes[0].node.history)
+    setChessNodes(newTempNodes)
   }
 
   return <PositionContext.Provider value={{
