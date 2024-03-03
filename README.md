@@ -1,5 +1,7 @@
 # Welcome to React Chess Analysis Board!
 
+[!WARNING] This project is not currently maintained and far from feature-complete. I hope to come back and finish it one day. For now, feel free to use it as inspiration and/or fork it! I will review any pull requests if you'd like to make one. 
+
 # Description
 React Chess Analysis Board provides a React component you can drop into your React app to render an analysis board of any [PGN string](http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm).
 
