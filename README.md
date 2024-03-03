@@ -97,7 +97,3 @@ If you create css classes with any of the classNames found in `src/lib/style.css
 6.  Push your changes  `git add .`  `git commit -m "feature/cool-new-feature"`  `git push --set-upstream origin your-branch-name`
 7.  Create pull request on GitHub
 8.  Contribute again  `git checkout main`  `git pull upstream main`  `git checkout -b your-new-branch-name`
-
-
-
-* Note: There's one additional undocumented easter egg config for fans of [Agadmator chess channel](https://www.youtube.com/c/AGADMATOR) in this library. Can you find it? ;) 
