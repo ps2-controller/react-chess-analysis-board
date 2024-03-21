@@ -70,18 +70,12 @@ export const PositionContextProvider = (props: any) => {
   useEffect(() => {
     const currentNode = chessNodes.filter((el) => el.nodeId === boardPosition.nodeId)[0]
     const currentNodeHistory = currentNode.node.history()
-    // console.log('fen', fen, boardPosition, currentNodeHistory, currentNode.node.fen())
     const tempChessRender = new Chess(initialFen ?? START_FEN)
-    if (currentNodeHistory.length === 0) {
-      const newMove = findTransitionMove(tempChessRender.fen(), fen) as Move
-      tempChessRender.move(newMove?.san)
-    } else {
-      currentNodeHistory.map((el, i) => {
-        if (i < boardPosition?.moveIndex) {
-          tempChessRender.move(el)
-        }
-      })
-    }
+    currentNodeHistory.map((el, i) => {
+      if (i < boardPosition?.moveIndex) {
+        tempChessRender.move(el)
+      }
+    })
     const newFen = tempChessRender.fen()
     setFen(newFen)
 
