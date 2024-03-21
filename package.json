@@ -1,6 +1,10 @@
 {
   "name": "react-chess-analysis-board",
+<<<<<<< Updated upstream
   "version": "0.0.19",
+=======
+  "version": "0.0.21",
+>>>>>>> Stashed changes
   "description": "React component for a fully featured, stylable chess analysis board.",
   "license": "GPL-3.0-or-later",
   "author": "Anurag Angara",
@@ -20,7 +24,8 @@
   "exports": {
     ".": {
       "import": "./dist/react-chess-analysis-board.mjs",
-      "require": "./dist/react-chess-analysis-board.umd.js"
+      "require": "./dist/react-chess-analysis-board.umd.js",
+      "types": "./dist/react-chess-analysis-board.d.ts"
     }
   },
   "scripts": {
