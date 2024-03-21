@@ -37,7 +37,6 @@ const App = () => {
         23.Bd7+ Kf8 1-0'
         config = {{
           boardConfig: {
-            fen: 'rnbqk2r/pppp1ppp/4p3/4P3/3P2Q1/2b5/P1PB1PPP/R3KBNR b KQkq - 1 7',
             ChessBoardProps: {
               // showBoardNotation: true,
               // boardOrientation:'black',
