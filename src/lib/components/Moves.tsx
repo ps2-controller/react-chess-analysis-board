@@ -90,7 +90,9 @@ const Moves = (props: TProps) => {
       })
       return nodeMoves
     })
-    moves.sort((a, b) => a[0]?.parentNodeId - b[0]?.parentNodeId)
+    if (moves.length > 1) {
+      moves.sort((a, b) => a[0]?.parentNodeId - b[0]?.parentNodeId)
+    }
     const compressMoves = (moves: TMoves) => {
       const movesCopy = moves
       if (movesCopy.length === 1) {

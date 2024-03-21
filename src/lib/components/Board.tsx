@@ -105,7 +105,6 @@ const Board = (props: TProps) => {
       }
     }
 
-    console.log('fen is', fen)
     const nextPosition = makeAMove(droppedMove, fen);
     const newFen = nextPosition?.newFen
     const newMove = nextPosition?.newMove
@@ -124,7 +123,7 @@ const Board = (props: TProps) => {
       } else {
         const newNodeHistory = currentNodeHistory.slice(0, boardPosition?.moveIndex)
         if (newMove?.san) {
-          if (newNodeHistory.length === currentNodeHistory.length && boardPosition?.nodeId !== 0) {
+          if (newNodeHistory.length === currentNodeHistory.length) {
             currentNodeHistory.push(newMove?.san)
             currentNodeCopy.move(newMove?.san)
             const newChessNodes = chessNodes
@@ -143,7 +142,7 @@ const Board = (props: TProps) => {
           }
           else {
             newNodeHistory.push(newMove?.san)
-            const newNode = new Chess()
+            const newNode = new Chess(boardConfig.fen)
             newNodeHistory.map(el => newNode.move(el))
             const newNodeId = Math.max(...chessNodes.map(el => el.nodeId)) + 1
             const newChessNode = {
@@ -155,10 +154,7 @@ const Board = (props: TProps) => {
             const newChessNodesCopy = chessNodes
             newChessNodesCopy.push(newChessNode)
             setChessNodes(newChessNodesCopy)
-            let newMoveIndex = boardPosition.moveIndex + 1
-            if (newNodeHistory.length === 1) {
-              newMoveIndex = 0
-            }
+            const newMoveIndex = boardPosition.moveIndex + 1
             setBoardPosition({
               ...boardPosition,
               moveIndex: newMoveIndex,

@@ -1,10 +1,6 @@
 {
   "name": "react-chess-analysis-board",
-<<<<<<< Updated upstream
-  "version": "0.0.19",
-=======
   "version": "0.0.21",
->>>>>>> Stashed changes
   "description": "React component for a fully featured, stylable chess analysis board.",
   "license": "GPL-3.0-or-later",
   "author": "Anurag Angara",
@@ -90,8 +86,8 @@
     "vitest": "^0.26.2"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "chess.js": "1.0.0-alpha.0",
     "react-chessboard": "^1.3.1"
