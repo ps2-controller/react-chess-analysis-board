@@ -33,7 +33,7 @@ const Board = (props: TProps) => {
     boardConfig.ChessBoardProps = {}
   }
 
-  const [chessBoardProps, setChessBoardProps] = useState<TChessBoardProps>(boardConfig.ChessBoardProps)
+  const [chessBoardProps, setChessBoardProps] = useState<TChessBoardProps>({...boardConfig.ChessBoardProps, position: fen})
 
   const handleGetcurrentPosition = (currentPosition: TCurrentPosition) => {
     if (callerGetPositionObject) {
@@ -47,10 +47,10 @@ const Board = (props: TProps) => {
   const callerGetPositionObject = chessBoardProps.getPositionObject
 
   useEffect(() => {
+    const tempChessRender = new Chess(fen)
     const currentNodeId = boardPosition?.nodeId
-    const currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0]
+    const currentNode = chessNodes.filter(el => el.nodeId === currentNodeId)[0] ?? chessRootNode
     const currentNodeHistory = currentNode.node.history()
-    const tempChessRender = new Chess()
     currentNodeHistory.map((el, i) => {
       if (i < boardPosition?.moveIndex) {
         tempChessRender.move(el)
@@ -58,8 +58,14 @@ const Board = (props: TProps) => {
     })
     const newFen = tempChessRender.fen()
     setFen(newFen)
+    setChessBoardProps({
+      ...chessBoardProps,
+      getPositionObject: (currentPosition) => handleGetcurrentPosition(currentPosition),
+      onPieceDrop: (sourceSquare, targetSquare, piece) => handleOnPieceDrop(sourceSquare, targetSquare, piece),
+      position: newFen
+    })
   }, [chessNodes])
-  
+
   useEffect(() => {
     setChessBoardProps({
       ...chessBoardProps,
@@ -99,6 +105,7 @@ const Board = (props: TProps) => {
       }
     }
 
+    console.log('fen is', fen)
     const nextPosition = makeAMove(droppedMove, fen);
     const newFen = nextPosition?.newFen
     const newMove = nextPosition?.newMove
@@ -108,7 +115,7 @@ const Board = (props: TProps) => {
       return false
     }
     if (chessNodes) {
-      const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
+      const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0] ?? chessRootNode
       const currentNodeCopy = currentNode.node
       const currentNodeHistory = currentNode.node.history()
       const nextMove = currentNodeHistory[boardPosition?.moveIndex]
@@ -122,7 +129,7 @@ const Board = (props: TProps) => {
             currentNodeCopy.move(newMove?.san)
             const newChessNodes = chessNodes
             const replacementNode = {
-              edgeNodeIndex: currentNode.edgeNodeIndex,
+              edgeNodeIndex: currentNode?.edgeNodeIndex,
               node: currentNodeCopy,
               nodeId: currentNode.nodeId,
               parentNodeId: currentNode.parentNodeId
@@ -148,7 +155,10 @@ const Board = (props: TProps) => {
             const newChessNodesCopy = chessNodes
             newChessNodesCopy.push(newChessNode)
             setChessNodes(newChessNodesCopy)
-            const newMoveIndex = boardPosition.moveIndex + 1
+            let newMoveIndex = boardPosition.moveIndex + 1
+            if (newNodeHistory.length === 1) {
+              newMoveIndex = 0
+            }
             setBoardPosition({
               ...boardPosition,
               moveIndex: newMoveIndex,
@@ -165,7 +175,9 @@ const Board = (props: TProps) => {
   return (
     <div>
       <Chessboard 
-        {...chessBoardProps}
+        {
+          ...chessBoardProps
+        }
       />
     </div>
   )

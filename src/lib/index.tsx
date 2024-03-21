@@ -26,8 +26,12 @@ export interface TProps {
 
 const ChessAnalysisBoard = (props: TProps) => {
 
+  const { config } = props
+
   return (
-    <PositionContextProvider>
+    <PositionContextProvider
+      initialFen={config?.boardConfig?.fen}
+    >
       <AnalysisBoard {...props} />
     </PositionContextProvider>
   )

@@ -15,7 +15,7 @@ interface TMove {
   moveNumber: number,
   move: string,
   nodeId: number,
-  parentNodeId: number,
+  parentNodeId?: number,
   edgeNodeIndex: number,
   className?: string
 }
@@ -60,7 +60,7 @@ const Moves = (props: TProps) => {
         }
         if (boardPosition.nodeId === el.nodeId) {
           className += 'active-node'
-          if (i === el.edgeNodeIndex) {
+          if (i === el?.edgeNodeIndex) {
             className += '-first'
           }
           if (i === history.length - 1 && i !== 0) {
@@ -71,7 +71,7 @@ const Moves = (props: TProps) => {
           }
         } else {
           className += 'inactive-node'
-          if (i === el.edgeNodeIndex) {
+          if (i === el?.edgeNodeIndex) {
             className += '-first'
           }
           if (i === history.length - 1 && i !== 0) {
@@ -82,15 +82,15 @@ const Moves = (props: TProps) => {
           index: i,
           moveNumber,
           move,
-          nodeId: el.nodeId,
-          parentNodeId: el.parentNodeId,
-          edgeNodeIndex: el.edgeNodeIndex,
+          nodeId: el?.nodeId,
+          parentNodeId: el?.parentNodeId,
+          edgeNodeIndex: el?.edgeNodeIndex,
           className
         }
       })
       return nodeMoves
     })
-    moves.sort((a, b) => a[0].parentNodeId - b[0].parentNodeId)
+    moves.sort((a, b) => a[0]?.parentNodeId - b[0]?.parentNodeId)
     const compressMoves = (moves: TMoves) => {
       const movesCopy = moves
       if (movesCopy.length === 1) {
@@ -98,14 +98,14 @@ const Moves = (props: TProps) => {
         return
       }
       const child = movesCopy[movesCopy.length - 1]
-      const parent = movesCopy.filter(el => el[0].nodeId === child[0].parentNodeId)[0]
+      const parent = movesCopy.filter(el => el[0]?.nodeId === child[0]?.parentNodeId)[0]
       const parentIndex = movesCopy.indexOf(parent)
       const parentCopy = parent
-      for (let i = child[0].edgeNodeIndex; i < child.length; i++) {
-        parentCopy.splice(i, 0, child[i])
+      for (let i = child[0]?.edgeNodeIndex; i < child.length; i++) {
+        parentCopy?.splice(i, 0, child[i])
       }
       movesCopy[parentIndex] = parentCopy
-      movesCopy.pop()
+      movesCopy?.pop()
       compressMoves(movesCopy)
     }
     compressMoves(moves)
@@ -116,7 +116,7 @@ const Moves = (props: TProps) => {
     <div className={movesContainerClassName}>
       {renderMoves.map((move: TMove) => {
         const moveNumber = move.index % 2 === 0 ? move.moveNumber + '.' : ''
-        if (move.className?.includes('first') && move.parentNodeId === 0) {
+        if (move.className?.includes('first') && move?.parentNodeId === 0) {
           return (
             <span key={`${move.nodeId}${move.index}`}>
               <div className="RCAB-move-separator" />

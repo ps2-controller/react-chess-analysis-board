@@ -1,6 +1,8 @@
 import { useState, useContext, createContext, useEffect } from 'react';
 import { Chess, Move } from 'chess.js'
 
+const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+
 interface TChessNodes {
   edgeNodeIndex: number, 
   node: Chess,
@@ -50,11 +52,13 @@ const PositionContext = createContext<TPositionTree>({
 
 export const PositionContextProvider = (props: any) => {
 
+  const { initialFen } = props
+
   const [boardPosition, setBoardPosition] = useState<TBoardPosition>({
     nodeId: 0,
     moveIndex: 0
   })
-  const [chessRootNode] = useState<Chess>(new Chess)
+  const [chessRootNode] = useState<Chess>(new Chess(initialFen ?? START_FEN))
   const [chessNodes, setChessNodes] = useState<TChessNodes[]>([{
     edgeNodeIndex: 0,
     node: chessRootNode,
@@ -62,16 +66,22 @@ export const PositionContextProvider = (props: any) => {
     parentNodeId: -1
   }])
 
-  const [fen, setFen] = useState<string>('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+  const [fen, setFen] = useState<string>(initialFen ?? START_FEN)
   useEffect(() => {
     const currentNode = chessNodes.filter((el) => el.nodeId === boardPosition.nodeId)[0]
     const currentNodeHistory = currentNode.node.history()
-    const tempChessRender = new Chess()
-    currentNodeHistory.map((el, i) => {
-      if (i < boardPosition?.moveIndex) {
-        tempChessRender.move(el)
-      }
-    })
+    // console.log('fen', fen, boardPosition, currentNodeHistory, currentNode.node.fen())
+    const tempChessRender = new Chess(initialFen ?? START_FEN)
+    if (currentNodeHistory.length === 0) {
+      const newMove = findTransitionMove(tempChessRender.fen(), fen) as Move
+      tempChessRender.move(newMove?.san)
+    } else {
+      currentNodeHistory.map((el, i) => {
+        if (i < boardPosition?.moveIndex) {
+          tempChessRender.move(el)
+        }
+      })
+    }
     const newFen = tempChessRender.fen()
     setFen(newFen)
 
@@ -102,7 +112,7 @@ export const PositionContextProvider = (props: any) => {
       return
     }
     const currentNode = chessNodes.filter(el => el.nodeId === boardPosition.nodeId)[0]
-    const edgeNodeIndex = currentNode.edgeNodeIndex
+    const edgeNodeIndex = currentNode?.edgeNodeIndex
     const newMoveIndex = boardPosition.moveIndex - 1
     if (newMoveIndex > edgeNodeIndex) {
       setBoardPosition({
@@ -149,3 +159,20 @@ export const PositionContextProvider = (props: any) => {
 }
 
 export const usePositionContext = () => useContext(PositionContext);
+
+
+function findTransitionMove(fen1: string, fen2: string) {
+  const chess = new Chess(fen1); 
+  const moves = chess.moves({ verbose: true });
+
+  for (const move of moves) {
+    chess.move(move); 
+    if (chess.fen() === fen2) { 
+      chess.undo();
+      return move;
+    }
+    chess.undo(); 
+  }
+
+  return null;
+}
